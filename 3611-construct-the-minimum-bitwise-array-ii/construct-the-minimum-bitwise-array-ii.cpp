@@ -11,11 +11,11 @@ public:
             bool found=false;
 
             for(int j=1;j<32;j++){
-                if((nums[i]&(1<<j))>0){
+                if((nums[i]&(1<<j))>0){                 //check set bit
                     continue;
                 }
                 int prev=j-1;
-                int x=(nums[i]^(1<<(j-1)));     //check set bit
+                int x=(nums[i]^(1<<(j-1)));     
                 result.push_back(x);
                 found=true;
                 break;
