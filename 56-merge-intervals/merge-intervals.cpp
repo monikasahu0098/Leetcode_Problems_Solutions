@@ -1,14 +1,14 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        vector<vector<int>>ans;
+        vector<vector<int>>result;
         int n=intervals.size();
 
         sort(intervals.begin(),intervals.end());
         for(int i=0;i<n;i++){
-            int start=intervals[i][0];
+            int st=intervals[i][0];
             int end=intervals[i][1];
-            if(!ans.empty() && end<=ans.back()[1]){
+            if(!result.empty() && end<=result.back()[1]){
                 continue;
             }
             for(int j=i+1;j<n;j++){
@@ -18,8 +18,8 @@ public:
                     break;
                 }
             }
-            ans.push_back({start,end});
+            result.push_back({st,end});
         }
-        return ans;
+        return result;
     }
 };
