@@ -3,9 +3,7 @@ public:
     bool isBalanced(vector<int>&f){
         int same=0;
         for(int i=0;i<26;i++){
-            if(f[i]==0){
-                continue;
-            }
+            if(f[i]==0)  continue;
             if(same==0){
                 same=f[i];
             }else if(f[i] != same){
