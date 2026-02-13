@@ -1,74 +1,95 @@
 class Solution {
 public:
-    int mono(const string& s){
-        if(s.empty()) return 0;
-        int cnt = 1;
-        int ans = 1;
-        for(int i = 1; i < (int)s.size(); i ++){
-            if(s[i] == s[i - 1]) cnt++;
-            else cnt = 1;
-            ans = max(ans, cnt);
-        }
-        return ans;
-    }
+    int helper(string &s, char ch1, char ch2){
+        int n=s.length();
+        unordered_map<int,int>diffMp;
+        int maxLen=0;
+        int count1=0;
+        int count2=0;
 
-    int duo(const string& s, char c1, char c2){
-        map<int, int> pos;
-        pos[0] = -1;
-        int ans = 0;
-        int delta = 0;
-        for(int i = 0; i < (int)s.size(); i ++){
-            if(s[i] != c1 && s[i] != c2){
-                pos.clear();
-                pos[0] = i;
-                delta = 0;
+        for(int i=0;i<n;i++){
+            if(s[i]!=ch1 && s[i]!=ch2){
+                diffMp.clear();
+                count1=0;
+                count2=0;
                 continue;
             }
-            if(s[i] == c1){
-                delta++;
+            if(s[i]==ch1){
+                count1++;
             }
-            else{
-                delta--;
+            if(s[i]==ch2){
+                count2++;
             }
-            if(pos.find(delta) != pos.end()){
-                ans = max(ans, i - pos[delta]);
+            if(count1==count2){
+                maxLen=max(maxLen,count1+count2);
             }
-            else{
-                pos[delta] = i;
-            }
-        }
-        return ans;
-    }
+            int diff=count1-count2;
 
-    int trio(const string& s){
-        vector<int> cnt(3, 0);
-
-        map<vector<int>, int> pos;
-        pos[{0, 0}] = -1;
-
-        int ans = 0;
-
-        for(int i = 0; i < (int)s.size(); i++){
-            cnt[s[i] - 'a']++;
-
-            vector<int> key = {cnt[1] - cnt[0], cnt[2] - cnt[0]};
-
-            if(pos.find(key) != pos.end()){
-                ans = max(ans, i - pos[key]);
-            }
-            else{
-                pos[key] = i;
+            if(diffMp.count(diff)){
+                maxLen=max(maxLen,i-diffMp[diff]);
+            }else{
+                diffMp[diff]=i;
             }
         }
-        return ans;
+        return maxLen;
     }
+
     int longestBalanced(string s) {
-        return max({
-            mono(s),
-            duo(s, 'a', 'b'),
-            duo(s, 'a', 'c'),
-            duo(s, 'b', 'c'),
-            trio(s)
-        });
+        int n=s.length();
+        int maxLen=0;
+
+        //CASE-I  ("aaaaa")
+        int count=1;
+        for(int i=1;i<n;i++){
+            if(s[i]==s[i-1]){
+                count++;
+            }else{
+                maxLen=max(maxLen,count);
+                count=1;
+            }
+            
+        }
+        maxLen=max(maxLen,count);
+
+
+        //CASE-II ("ababab")
+        maxLen=max(maxLen,helper(s,'a','b'));
+        maxLen=max(maxLen,helper(s,'a','c'));
+        maxLen=max(maxLen,helper(s,'b','c'));
+
+
+        //CASE-III
+        int countA=0;
+        int countB=0;
+        int countC=0;
+        unordered_map<string,int>mp;
+
+        for(int i=0;i<n;i++){
+            if(s[i]=='a'){
+                countA++;
+            }
+            if(s[i]=='b'){
+                countB++;
+            }
+            if(s[i]=='c'){
+                countC++;
+            }
+            if(countA==countB && countA==countC){
+                maxLen=max(maxLen, countA+countB+countC);
+            }
+            int diffAB=countA-countB;
+            int diffAC=countA-countC;
+
+            string key=to_string(diffAB)+"_"+to_string(diffAC);
+
+            if(mp.count(key)){
+                maxLen=max(maxLen,i-mp[key]);
+            }else{
+                mp[key]=i;
+            }
+        }
+        return maxLen;
     }
+
+
 };
