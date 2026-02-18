@@ -1,13 +1,13 @@
 class Solution {
 public:
     bool checkIfPangram(string sentence) {
-        vector<bool>find(26,false);
+        vector<int>find(26,0);
         
         for(char c:sentence){
-            find[c-'a']=true;
+            find[c-'a']++;
         }
         for(int i=0;i<26;i++){
-            if(!find[i]){
+            if(find[i]==0){
                 return false;
             }
         }
