@@ -1,6 +1,9 @@
 class Solution {
 public:
     string makeLargestSpecial(string s) {
+        if(s.size()==0){
+            return "";
+        }
         string ans="";
         vector<string>specials;
         int st=0;
