@@ -1,24 +1,18 @@
 class Solution {
 public:
-    bool allCapital(string &s){
+    bool check(string &s, char st, char end){
         for(char ch:s){
-            if(ch<'A' || ch>'Z'){
+            if(ch<st || ch>end){
                 return false;
             }
         }
         return true;
     }
-    bool allSmall(string &s){
-        for(char ch:s){
-            if(ch<'a' || ch>'z'){
-                return false;
-            } 
-        }
-        return true;
-    }
+
+    
     bool detectCapitalUse(string word) {
         string substr=word.substr(1);
-        if(allCapital(word) || allSmall(word) || allSmall(substr)){
+        if(check(word,'A','Z') || check(word,'a','z') || check(substr,'a','z')){
             return true;
         }
         return false;
