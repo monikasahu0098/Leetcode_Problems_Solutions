@@ -8,7 +8,7 @@ public:
                 while(j<n && s[j] != ' '){
                     j++;
                 }
-                reverse(begin(s)+i,begin(s)+j);
+                reverse(s.begin()+i,s.begin()+j);
                 i=j;
             }
         }
