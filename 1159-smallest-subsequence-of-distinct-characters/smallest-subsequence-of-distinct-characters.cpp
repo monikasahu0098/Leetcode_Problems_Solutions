@@ -11,17 +11,17 @@ public:
             lastIdx[ch-'a']=i;
         }
         for(int i=0;i<n;i++){
-            char c=s[i];
-            int idx=c-'a';
+            char ch=s[i];
+            int idx=ch-'a';
             if(visited[idx]==true){
                 continue;
             }
 
-            while(result.length()>0 && result.back()>c && lastIdx[result.back()-'a']>i){
+            while(result.length()>0 && result.back()>ch && lastIdx[result.back()-'a']>i){
                 visited[result.back()-'a']=false;
                 result.pop_back();
             }
-            result.push_back(c);
+            result.push_back(ch);
             visited[idx]=true;
         }
         return result;
