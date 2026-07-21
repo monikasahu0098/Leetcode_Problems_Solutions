@@ -10,7 +10,7 @@ public:
             int start = i;
 
             while (i < n && s[i] == s[start]) {
-                ++i;
+                i++;
             }
 
             if (s[start] == '0') {
