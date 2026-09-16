@@ -3,7 +3,7 @@ public:
     static const int MOD = 1e9 + 7;
 
     int numberOfSets(int n, int k) {
-        vector<vector<long long>> dp(n, vector<long long>(k + 1));
+        vector<vector<long long>> dp(n,vector<long long>(k + 1));
         // 0 segments → exactly 1 way
         for(int i = 0; i < n; i++) dp[i][0] = 1;
 
