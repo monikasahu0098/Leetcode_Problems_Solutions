@@ -2,28 +2,20 @@ class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
         int n=nums.size();
-
-        vector<int>prefix;
-        prefix=nums;
-        for(int i=1;i<n;i++){
-            prefix[i]+=prefix[i-1];
-        }
-        int i=0;
-        int j=0;
         int len=1e9;
+        int i=0;
 
-        int curr=0;
-        while(j<n){
-            curr=(i==0)? prefix[j] : prefix[j]-prefix[i-1];
+        int currSum=0;
+        for(int j=0;j<n;j++){
+            currSum += nums[j];
 
-            if(curr>=target){
+            while(currSum>=target){
                 len=min(len,j-i+1);
+                currSum-=nums[i];
                 i++;
-            }else{
-                j++;
             }
         }
         return (len==1e9)? 0 : len;
-    }
 
+    }
 };
