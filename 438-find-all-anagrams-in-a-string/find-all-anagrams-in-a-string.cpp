@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
         vector<int>v;
-
+        
         int n1=s.length();
         int n2=p.length();
         if(n1<n2) return v;
