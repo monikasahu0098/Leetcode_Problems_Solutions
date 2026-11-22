@@ -4,8 +4,7 @@ public:
         int n=nums.size();
         sort(nums.begin(),nums.end());
 
-        int closestSum=100000;
-
+        int closestSum=1e9;
         for(int k=0;k<n-2;k++){
             int i=k+1;
             int j=n-1;
