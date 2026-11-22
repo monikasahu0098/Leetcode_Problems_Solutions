@@ -6,7 +6,7 @@ public:
 
         int closestSum=100000;
 
-        for(int k=0;k<(n-2);k++){
+        for(int k=0;k<n-2;k++){
             int i=k+1;
             int j=n-1;
 
