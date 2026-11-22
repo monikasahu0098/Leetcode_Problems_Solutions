@@ -9,8 +9,14 @@ public:
             return ((ch>='0' && ch<='9') || (tolower(ch)>='a' && tolower(ch)<='z'));
         };
         while(i<j){
-            while(i<j && !isAlphaNum(s[i])) i++;
-            while(i<j && !isAlphaNum(s[j])) j--;
+            if(!isAlphaNum(s[i])){
+                i++;
+                continue;
+            }
+            if(!isAlphaNum(s[j])){
+                j--;
+                continue;
+            }
 
             if(tolower(s[i])!=tolower(s[j])){
                 return false;
