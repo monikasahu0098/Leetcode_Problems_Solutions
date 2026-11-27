@@ -3,29 +3,30 @@ public:
     bool wordPattern(string pattern, string s) {
         stringstream ss(s);
         vector<string>words;
+
         string word;
+
         while(ss>>word){
             words.push_back(word);
         }
-        if(pattern.size() != words.size()){
-            return false;
-        }
+        if(pattern.size() != words.size()) return false;
+
         unordered_map<char,string>mp;
         unordered_set<string>st;
 
-        for(int i=0;i<pattern.size();i++){
-            char p=pattern[i];
-            string w=words[i];
+        for(int i=0;i<words.size();i++){
+            char c=pattern[i];
+            string word=words[i];
 
-            if(mp.count(p)){
-                if(mp[p] != w){
-                    return false;
-                }
+            if(mp.count(c)){
+                if(mp[c] != word) return false;
             }else{
-                if(st.count(w)) return false;
-                mp[p]=w;
-                st.insert(w);
+                if(st.count(word)) return false;
+                mp[c]=word;
+                st.insert(word);
+
             }
+
         }
         return true;
     }
