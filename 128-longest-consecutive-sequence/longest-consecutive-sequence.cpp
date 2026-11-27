@@ -29,20 +29,18 @@ public:
         unordered_set<int>s(nums.begin(),nums.end());
         int longest=0;
 
-        for(int i:s){
-            if(s.find(i-1) == s.end()){
-                int curNum=i;
+        for(int n:s){
+            if(s.find(n-1) == s.end()){
+                int curNum=n;
                 int curLen=1;
 
                 while(s.find(curNum+1) != s.end()){
                     curNum++;
                     curLen++;
                 }
-
                 longest=max(longest,curLen);
             }
         }
         return longest;
-        
     }
 };
